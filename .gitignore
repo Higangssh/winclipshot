@@ -1,0 +1,5 @@
+/winclipshot.exe
+/winclipshot
+/dist/
+*.test
+*.out
