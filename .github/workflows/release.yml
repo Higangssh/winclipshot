@@ -1,0 +1,55 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [amd64, arm64]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Build
+        env:
+          GOOS: windows
+          GOARCH: ${{ matrix.arch }}
+          CGO_ENABLED: 0
+        run: |
+          VERSION="${GITHUB_REF_NAME}"
+          OUT="winclipshot-${VERSION}-windows-${GOARCH}"
+          mkdir -p "dist/${OUT}"
+          go build -trimpath -ldflags "-s -w" -o "dist/${OUT}/winclipshot.exe" .
+          cp README.md LICENSE "dist/${OUT}/"
+          (cd dist && zip -r "${OUT}.zip" "${OUT}")
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: winclipshot-${{ matrix.arch }}
+          path: dist/*.zip
+
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          generate_release_notes: true

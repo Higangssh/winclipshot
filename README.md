@@ -66,7 +66,13 @@ When `winclipshot.exe` is not running, nothing is different — `Win+Shift+S` an
 
 ## Install
 
-Download `winclipshot.exe` from [Releases](https://github.com/Higangssh/winclipshot/releases), or build from source:
+1. Grab the latest `winclipshot-<ver>-windows-amd64.zip` (or `arm64`) from [Releases](https://github.com/Higangssh/winclipshot/releases).
+2. Unzip anywhere you like — it's a single `winclipshot.exe`, no installer, no registry changes.
+3. Double-click `winclipshot.exe` to run it. Leave the console window open; closing it quits the tool.
+
+**Run at sign-in (optional):** press `Win+R`, enter `shell:startup`, drop a shortcut to `winclipshot.exe` into the folder that opens. Windows will launch it automatically every time you log in.
+
+**From source:**
 
 ```sh
 go install github.com/Higangssh/winclipshot@latest
@@ -74,19 +80,7 @@ go install github.com/Higangssh/winclipshot@latest
 
 ## Usage
 
-Just run it:
-
-```sh
-winclipshot.exe
-```
-
-Leave it running in a terminal window (or start minimized). Then use `Win+Shift+S` normally.
-
-To auto-start at login, drop a shortcut to `winclipshot.exe` into:
-
-```
-%AppData%\Microsoft\Windows\Start Menu\Programs\Startup
-```
+Run `winclipshot.exe` and leave the console window open. Then use `Win+Shift+S` normally — the tool only reacts when a screenshot actually lands on the clipboard. Stop it with `Ctrl+C` or by closing the window.
 
 ## Options
 
