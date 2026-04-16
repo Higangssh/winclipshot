@@ -78,6 +78,19 @@ When `winclipshot.exe` is not running, nothing is different — `Win+Shift+S` an
 go install github.com/Higangssh/winclipshot@latest
 ```
 
+## Windows SmartScreen Warning
+
+Windows SmartScreen may show **"Windows protected your PC"** when you first run the executable. This is a false positive — the binary is not code-signed yet, so Windows flags it as "unknown publisher."
+
+**To run anyway:**
+
+1. Click **More info**
+2. Click **Run anyway**
+
+**Or unblock the file first:** right-click `winclipshot.exe` → Properties → check **Unblock** at the bottom → OK.
+
+The binary is built from public source code via GitHub Actions ([workflow](.github/workflows/release.yml)). [VirusTotal scan](https://www.virustotal.com/gui/file/4682e80834da5695b55e1feb0b620a5b1ba4c5aa55ffc0f9b18db0b165b55fec/detection) reports clean across all major engines (Kaspersky, ESET, CrowdStrike, BitDefender, Avast, etc.).
+
 ## Usage
 
 Run `winclipshot.exe` and leave the console window open. Then use `Win+Shift+S` normally — the tool only reacts when a screenshot actually lands on the clipboard. Stop it with `Ctrl+C` or by closing the window.
