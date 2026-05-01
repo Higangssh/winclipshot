@@ -4,6 +4,12 @@ Make `Win+Shift+S` paste as a file path in terminals — so Claude Code, SSH ses
 
 On macOS, terminals like iTerm2 and tools like Claude Code handle clipboard images natively. On native Windows they can't: the terminal's stdin only accepts text. `winclipshot` bridges the gap — it quietly watches the clipboard, and when a screenshot is about to be pasted into a terminal it swaps the image for the file path of a saved PNG.
 
+## Demo
+
+<p align="center">
+  <img src="./assets/winclipshot-demo.gif" alt="winclipshot demo" width="640">
+</p>
+
 ## How it works
 
 `winclipshot` doesn't change `Win+Shift+S` or any keybinding. It subscribes to Windows' clipboard-change events (`AddClipboardFormatListener`) and reacts only when a new **image** appears. When it does, one of three things happens:

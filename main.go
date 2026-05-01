@@ -1,13 +1,13 @@
 // winclipshot — let Windows terminals paste screenshots as file paths.
 //
 // Flow:
-//   1. Watch the clipboard for new image data (OS event, no polling).
-//   2. When an image arrives, inspect the currently-focused window.
-//      - Terminal: save to a PNG file and replace the clipboard with the path.
-//      - Other:    remember the image as "pending" and briefly watch for the
-//                  user to switch focus to a terminal. If they do within the
-//                  pending window, convert then. If not, the clipboard is
-//                  never touched and a normal paste-as-image still works.
+//  1. Watch the clipboard for new image data (OS event, no polling).
+//  2. When an image arrives, inspect the currently-focused window.
+//     - Terminal: save to a PNG file and replace the clipboard with the path.
+//     - Other:    remember the image as "pending" and briefly watch for the
+//     user to switch focus to a terminal. If they do within the
+//     pending window, convert then. If not, the clipboard is
+//     never touched and a normal paste-as-image still works.
 package main
 
 import (
